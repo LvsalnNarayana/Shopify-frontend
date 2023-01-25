@@ -1,1 +1,71 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.container {
+  width: 90%;
+  max-width: 1400px;
+  padding: 0px 1%;
+  margin: 0px auto;
+}
+::placeholder{
+  color: #c7c7c7;
+}
+
+p {
+  margin-bottom: 0px;
+}
+.img_fluid {
+  max-width: 100%;
+}
+
+.pen_script {
+  font-family: 'Niconne', cursive !important;
+}
+
+.bg_blue {
+  background-color: rgb(24, 64, 97);
+}
+
+.text_white {
+  color: white !important;
+}
+
+html, body { height: 100%; }
+.cdk-overlay-pane{
+  margin-top: 8px;
+  margin-left: 10px;
+}
+#mat-menu-panel-0{
+  background-color: white !important;
+  color: black;
+  /* max-width: 300px !important; */
+}
+#mat-menu-panel-0::before{
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: white !important;
+  top: 0px;
+  right: 0px;
+  transform: rotateX(90deg);
+}
+#mat-menu-panel-0 .mdc-list-item__primary-text{
+  color: black !important;
+}
+#mat-menu-panel-0 .mat-mdc-menu-item{
+  width: 250px;
+  align-items: center;
+}
+#mat-menu-panel-0 .mat-mdc-menu-item:hover{
+  background-color: rgba(0,0,0,0.05);
+}

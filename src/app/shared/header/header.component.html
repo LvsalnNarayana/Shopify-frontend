@@ -1,0 +1,44 @@
+<header class="bg_blue">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="logo">
+        <p class="pen_script text_white">Shopify</p>
+      </div>
+      <div class="search_bar_container">
+        <form>
+          <input type="text" name="search_bar" id="search_bar" class="search_bar" placeholder="Search any product">
+        </form>
+      </div>
+      <div class="user_panel d-flex align-items-center justify-content-end">
+        <div class="user_meta_container d-flex align-items-center me-4" [matMenuTriggerFor]="menu">
+          <div class="user_avatar me-2">
+            <img class="user_avatar_img img_fluid" src="assets/images/man.png" alt="">
+          </div>
+          <p class="text_white username">username</p>
+        </div>
+        <mat-menu #menu="matMenu" [xPosition]="'before'" >
+          <button mat-menu-item>
+            <span class="menu_icon_container">
+              <img class="menu_icon" src="assets/images/man.png" alt="">
+            </span>
+            Account
+          </button>
+          <button mat-menu-item>Orders</button>
+          <button mat-menu-item>Address</button>
+          <button mat-menu-item>Message Center</button>
+          <button mat-menu-item>Payments</button>
+          <button mat-menu-item>Subscription</button>
+          <button mat-menu-item>Settings</button>
+          <button mat-menu-item>Signout</button>
+        </mat-menu>
+        <div class="user_cart_container d-flex align-items-center">
+          <div class="user_cart_img me-2">
+            <img src="assets/images/shopping-cart.png" class="img_fluid" alt="">
+          </div>
+          <p class="text_white cart_text">Cart</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
