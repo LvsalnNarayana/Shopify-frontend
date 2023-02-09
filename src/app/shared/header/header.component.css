@@ -6,7 +6,7 @@ header {
   width: 15%;
 }
 
-.logo p {
+.logo a {
   font-size: 30px;
 }
 
@@ -33,6 +33,7 @@ header {
 }
 .user_panel {
   width: 20%;
+  cursor: pointer;
 }
 
 .user_avatar {
@@ -56,6 +57,11 @@ header {
   font-size: 16px;
   font-weight: bold;
 }
+.menu_icon_container{
+  width: 25px;
+  margin-right: 10px;
+}
 .menu_icon{
+  display: block;
   width: 25px;
 }

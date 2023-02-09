@@ -2,7 +2,7 @@
   <div class="container">
     <div class="d-flex justify-content-between align-items-center">
       <div class="logo">
-        <p class="pen_script text_white">Shopify</p>
+        <a class="brand_logo cursor_pointer pen_script text_white" routerLink='/products'>Shopify</a>
       </div>
       <div class="search_bar_container">
         <form>
@@ -16,22 +16,89 @@
           </div>
           <p class="text_white username">username</p>
         </div>
-        <mat-menu #menu="matMenu" [xPosition]="'before'" >
-          <button mat-menu-item>
-            <span class="menu_icon_container">
-              <img class="menu_icon" src="assets/images/man.png" alt="">
-            </span>
-            Account
+        <mat-menu #menu="matMenu" [xPosition]="'before'">
+          <button mat-menu-item routerLink="/account">
+            <div class="d-flex justify-content-start align-items-center">
+              <div class="menu_icon_container">
+                <img class="menu_icon" src="assets/images/man.png" alt="">
+              </div>
+              <div>
+                Account
+              </div>
+            </div>
           </button>
-          <button mat-menu-item>Orders</button>
-          <button mat-menu-item>Address</button>
-          <button mat-menu-item>Message Center</button>
-          <button mat-menu-item>Payments</button>
-          <button mat-menu-item>Subscription</button>
-          <button mat-menu-item>Settings</button>
-          <button mat-menu-item>Signout</button>
+          <button mat-menu-item routerLink="/orders">
+            <div class="d-flex justify-content-start align-items-center">
+              <div class="menu_icon_container">
+                <img class="menu_icon" src="assets/images/shopping-bag.png" alt="">
+              </div>
+              <div>
+                Orders
+              </div>
+            </div>
+          </button>
+          <button mat-menu-item routerLink="/address">
+            <div class="d-flex justify-content-start align-items-center">
+              <div class="menu_icon_container">
+                <img class="menu_icon" src="assets/images/address.png" alt="">
+              </div>
+              <div>
+                Address
+              </div>
+            </div>
+          </button>
+          <button mat-menu-item routerLink="/message-center">
+            <div class="d-flex justify-content-start align-items-center">
+              <div class="menu_icon_container">
+                <img class="menu_icon" src="assets/images/message-center.png" alt="">
+              </div>
+              <div>
+                Message Center
+              </div>
+            </div>
+          </button>
+          <button mat-menu-item routerLink="/payments">
+            <div class="d-flex justify-content-start align-items-center">
+              <div class="menu_icon_container">
+                <img class="menu_icon" src="assets/images/payment-method.png" alt="">
+              </div>
+              <div>
+                Payments
+              </div>
+            </div>
+          </button>
+          <button mat-menu-item routerLink="/premium">
+            <div class="d-flex justify-content-start align-items-center">
+              <div class="menu_icon_container">
+                <img class="menu_icon" src="assets/images/crown.png" alt="">
+              </div>
+              <div>
+                Premium
+              </div>
+            </div>
+          </button>
+          <button mat-menu-item routerLink="/settings">
+            <div class="d-flex justify-content-start align-items-center">
+              <div class="menu_icon_container">
+                <img class="menu_icon" src="assets/images/settings.png" alt="">
+              </div>
+              <div>
+                Settings
+              </div>
+            </div>
+          </button>
+          <button mat-menu-item>
+            <div class="d-flex justify-content-start align-items-center">
+              <div class="menu_icon_container">
+                <img class="menu_icon" src="assets/images/logout.png" alt="">
+              </div>
+              <div>
+                Signout
+              </div>
+            </div>
+          </button>
         </mat-menu>
-        <div class="user_cart_container d-flex align-items-center">
+        <div class="user_cart_container d-flex align-items-center" routerLink="/cart">
           <div class="user_cart_img me-2">
             <img src="assets/images/shopping-cart.png" class="img_fluid" alt="">
           </div>

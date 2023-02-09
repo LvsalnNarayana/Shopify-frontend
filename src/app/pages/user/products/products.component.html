@@ -1,0 +1,28 @@
+<div class="fluid_container">
+  <div class="row g-0 pt-5">
+    <div class="col-md-2 px-2">
+      <h3 class="filter_text">Filter</h3>
+      <app-filter></app-filter>
+    </div>
+    <div class="col-md-10 px-2">
+      <h3 class="Category_title">Sample Products <span class="result_description">[showing Results 20 - 2000]</span>
+      </h3>
+
+      <mat-chip-listbox class="sortList_container">
+        <mat-chip-option (selectionChange)="clicked($event)">One fish</mat-chip-option>
+        <mat-chip-option>Two fish</mat-chip-option>
+        <mat-chip-option>Accent fish</mat-chip-option>
+        <mat-chip-option>Warn fish</mat-chip-option>
+      </mat-chip-listbox>
+
+      <div class="d-flex justify-content-start align-items-center flex-wrap ">
+        <app-product-card class="product_card"></app-product-card>
+        <app-product-card class="product_card"></app-product-card>
+        <app-product-card class="product_card"></app-product-card>
+        <app-product-card class="product_card"></app-product-card>
+        <app-product-card class="product_card"></app-product-card>
+        <app-product-card class="product_card"></app-product-card>
+      </div>
+    </div>
+  </div>
+</div>

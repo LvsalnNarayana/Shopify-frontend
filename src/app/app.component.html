@@ -1,6 +1,14 @@
+<!-- <mat-sidenav-container id="main_sidenav" *ngIf="true" hasBackdrop="true"
+  [ngStyle]="{ 'position' : sidenav.opened ? 'fixed' : 'relative'}">
+  <mat-sidenav #sidenav mode="side" position="end" #cart [mode]="'over'">
+    <app-cart></app-cart>
+  </mat-sidenav>
+  <mat-sidenav-content style="min-height: 100vh;">
+    <app-header></app-header>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
 <app-header></app-header>
-<div class="container">
-  <div style="height: 300vw;">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+<router-outlet></router-outlet>

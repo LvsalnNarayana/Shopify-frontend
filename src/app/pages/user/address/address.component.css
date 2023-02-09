@@ -1,0 +1,29 @@
+.address {
+  width: 30%;
+  min-height: 310px;
+  border: 1px solid #b9b9b9;
+  border-radius: 10px;
+  margin: 0px 10px 10px 0px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.add_address {
+  border: 2px dashed #b9b9b9;
+  align-items: center !important;
+}
+
+.order_summary_control {
+  color: rgb(0, 72, 255);
+  cursor: pointer;
+}
+
+.default_address_seperator {
+  margin: 0px !important;
+  margin-bottom: 10px !important;
+  height: 1px;
+  width: 100%;
+  background-color: #b9b9b9;
+}

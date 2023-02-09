@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
+// import { SideNavService } from 'src/app/services/sidenav/side-nav.service';
 // import
 @Component({
   selector: 'app-header',
@@ -8,16 +9,19 @@ import { MatMenuTrigger } from '@angular/material/menu';
 })
 export class HeaderComponent {
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
-  ngOnInit(){
-    console.log("hello");
-
-    console.log(this.trigger?.menu);
-
+  @ViewChild('megaMenuTrigger') megaMenuTrigger!: MatMenuTrigger;
+  enteredButton = false;
+  isMatMenuOpen = false;
+  constructor(
+    // private sideNav: SideNavService
+  ) { }
+  ngOnInit() { }
+  ngAfterViewInit() {
+    console.log(this.trigger);
   }
-  ngAfterViewInit(){
-    console.log(this.trigger?.menu);
-
-  }
+  // toggleSidenav() {
+  //   this.sideNav.open()
+  // }
 }
 
 

@@ -1,0 +1,26 @@
+<div [ngSwitch]="form_component">
+  <form class="w-250 m-auto" *ngSwitchCase="'login'">
+    <label for="user_email" class="form_label mb-3"> E-mail </label>
+    <input type="text" name="user_email" id="user_email" class="form_input mb-4" placeholder="Enter your E-mail Id" />
+    <label for="user_password" class="form_label mb-3"> Password </label>
+    <input type="text" name="user_password" id="user_password" class="form_input mb-4"
+      placeholder="Enter your Password" />
+    <input type="submit" value="Login" class="btn bg_blue text_white mt-4" />
+  </form>
+  <form class="w-100" *ngSwitchCase="'signup'">
+    <label for="user_name" class="form_label mb-3">Your Name</label>
+    <input type="text" name="user_name" id="user_name" class="form_input mb-4" placeholder="First & Last Name" />
+    <label for="user_email" class="form_label mb-3"> E-mail </label>
+    <input type="text" name="user_email" id="user_email" class="form_input mb-4" placeholder="Enter your E-mail" />
+    <label for="user_mobile" class="form_label mb-3">Mobile No.</label>
+    <input type="text" name="user_mobile" id="user_mobile" class="form_input mb-4"
+      placeholder="Enter your Mobile No." />
+    <label for="user_password" class="form_label mb-3"> Password </label>
+    <input type="text" name="user_password" id="user_password" class="form_input mb-4"
+      placeholder="Enter your Password" />
+    <label for="user_confirm_password" class="form_label mb-3">Confirm Password</label>
+    <input type="text" name="user_confirm_password" id="user_confirm_password" class="form_input mb-4"
+      placeholder="Re-Enter your password" />
+    <input type="submit" value="Signup" class="btn bg_blue text_white mt-4" />
+  </form>
+</div>
