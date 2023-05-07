@@ -1,9 +1,9 @@
 .address {
-  width: 30%;
-  min-height: 310px;
-  border: 1px solid #b9b9b9;
-  border-radius: 10px;
-  margin: 0px 10px 10px 0px;
+  width: 22%;
+  min-height: 287px;
+  border: var(--border-2px);
+  border-radius: var(--border-radius-12);
+  margin: 0px 15px 15px 0px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
@@ -11,7 +11,8 @@
 }
 
 .add_address {
-  border: 2px dashed #b9b9b9;
+  border: 2px dashed var(--grey-2);
+  justify-content: center !important;
   align-items: center !important;
 }
 

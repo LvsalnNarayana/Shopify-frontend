@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule) },
-  { path: 'pages/admin', loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) },
+  { path: 'admin', loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) },
+  { path: 'test', loadChildren: () => import('./test/test.module').then(m => m.TestModule) },
+  { path: 'seller', loadChildren: () => import('./pages/seller/seller.module').then(m => m.SellerModule) },
 ];
 
 @NgModule({

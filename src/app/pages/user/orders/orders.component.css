@@ -4,27 +4,23 @@
 }
 
 .order {
-  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  box-shadow: var(--box-shadow-light);
+  border-radius: var(--border-radius-12);
   width: 100%;
 }
 
 .order_meta_container {
-  background-color: #d8d8d8;
+  background-color: var(--grey-2);
 }
 
 .order_meta_text {
-  color: #565656;
+  color: var(--secondary);
   text-transform: uppercase;
   font-size: 14px;
   margin-bottom: 7px;
   font-weight: 700;
 }
 
-.order_summary_control {
-  color: rgb(0, 72, 255);
-  cursor: pointer;
-}
 
 .order_summary_control:hover {
   text-decoration: underline;
@@ -32,7 +28,7 @@
 
 .order_product_controls {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 }
 

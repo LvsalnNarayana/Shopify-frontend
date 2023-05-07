@@ -16,24 +16,27 @@ import { SignupComponent } from './signup/signup.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CartComponent } from './cart/cart.component';
+import { ProductComponent } from './product/product.component';
+import { AuthGuard } from 'src/app/services/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'products', component: ProductsComponent },
-  { path: 'checkout', component: CheckoutComponent },
-  { path: 'account', component: AccountComponent },
-  { path: 'orders', component: OrdersComponent },
-  { path: 'premium', component: PremiumComponent },
-  { path: 'address', component: AddressComponent },
-  { path: 'payments', component: PaymentsComponent },
-  { path: 'wallet', component: WalletComponent },
-  { path: 'seller-registration', component: SellerRegistrationComponent },
+  { path: 'checkout', canActivate: [AuthGuard], component: CheckoutComponent },
+  { path: 'account', canActivate: [AuthGuard], component: AccountComponent },
+  { path: 'orders', canActivate: [AuthGuard], component: OrdersComponent },
+  { path: 'premium', canActivate: [AuthGuard], component: PremiumComponent },
+  { path: 'address', canActivate: [AuthGuard], component: AddressComponent },
+  { path: 'payments', canActivate: [AuthGuard], component: PaymentsComponent },
+  { path: 'wallet', canActivate: [AuthGuard], component: WalletComponent },
+  { path: 'seller-registration', canActivate: [AuthGuard], component: SellerRegistrationComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'message-center', component: MessageCenterComponent },
-  { path: 'settings', component: SettingsComponent },
-  { path: 'security', component: SecurityComponent },
-  { path: 'cart', component: CartComponent },
+  { path: 'message-center', canActivate: [AuthGuard], component: MessageCenterComponent },
+  { path: 'settings', canActivate: [AuthGuard], component: SettingsComponent },
+  { path: 'security', canActivate: [AuthGuard], component: SecurityComponent },
+  { path: 'cart', canActivate: [AuthGuard], component: CartComponent },
+  { path: 'product/:id', component: ProductComponent },
 ];
 
 @NgModule({

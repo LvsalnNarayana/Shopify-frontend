@@ -10,7 +10,9 @@
 
 .product_card_image_container {
   height: 250px;
-  background-color: rgba(0, 0, 0, 0.15);
+}
+.product_card_image_container img{
+  max-height: 100%;
 }
 
 .product_favourite_container {
@@ -34,7 +36,7 @@
 .product_brand {
   font-size: 16px;
   color: #7b7b7b;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .seller_verified {
@@ -48,7 +50,8 @@
 .product_price,
 .product_updated_price,
 .product_discount {
-  font-weight: 900;
+  font-weight: 700;
+  font-size: 16px;
 }
 
 .product_updated_price {

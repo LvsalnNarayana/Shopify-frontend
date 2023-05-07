@@ -1,13 +1,90 @@
-<div class="container">
-  <div class="cart_container">
-    <h3>Shopping Basket</h3>
-    <div class="cart_item d-flex justify-content-around align-items-start">
-      <div class="cart_item_img_container"></div>
-      <div class="cart_item_meta_container">
-        <p>Product Title</p>
-        <div class="cart_item_controls"></div>
+<div class="container_fluid">
+  <div class="d-flex justify-content-start align-items-start position-relative mt-5">
+    <div class="cart_container p-4 mb-5 ms-3">
+      <h2 class="pb-2">
+        <b>
+          Shopping Basket
+        </b>
+      </h2>
+      <div *ngIf="cart_data.length > 0;else no_cart_data">
+        <div *ngFor="let item of cart_data">
+          <hr class="divider">
+          <div class="cart_item w-100 py-3 d-flex justify-content-start align-items-stretch">
+            <div class="cart_item_img_container">
+              <img src="{{item.variations.colors.image_url}}" alt="">
+            </div>
+            <div class="cart_item_meta_container d-flex flex-column justify-content-between align-items-start">
+              <div class="cart_item_meta w-100">
+                <h3 class="cursor_pointer hover_underline pb-4">{{item.title}}({{item.variations.name}}) -
+                  {{item.variations.colors.name}}</h3>
+                <p class="pb-3" [ngClass]="item.variations.colors.number_of_item > 200 ? 'text_green':'text_red'">
+                  {{item.variations.colors.number_of_item >
+                  200? "In Stock":"Out of Stock"}}</p>
+                <div class="d-flex justify-content-start align-items-center pb-3"
+                  *ngIf="item?.variations?.premium_delivery">
+                  <img style="width: 20px;" src="assets/images/crown.png" alt="">&nbsp;<h5><b>Premium</b></h5>
+                  &nbsp;&nbsp;Delivery Available
+                </div>
+                <p>
+                  <b>
+                    <span>Expected Delivery Date&nbsp;:&nbsp;</span>
+                    <span class="text_green">20-jan-2023</span>
+                  </b>
+                </p>
+              </div>
+              <div class="cart_item_controls w-100 d-flex justify-content-start align-items-center pt-4">
+                <div class="quantity_control d-flex justify-content-start align-items-center me-3">
+                  <button class="btn_no_style px-3 py-2 cursor_pointer"
+                    (click)="update_cart_quantity({productId:item.id,variationId:item.variations._id,colorId:item.variations.colors.name},'INCREMENT')"><b>+</b></button>
+                  <p class="px-1 h-100" style="cursor:default;">
+                    <span class="text_grey">|</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <b>{{item.quantity}}</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="text_grey">|</span>
+                  </p>
+                  <button class="btn_no_style px-3 py-2 cursor_pointer"
+                    (click)="update_cart_quantity({productId:item.id,variationId:item.variations._id,colorId:item.variations.colors.name},'DECREMENT')"><b>-</b></button>
+                </div>
+                <p class="text_link underline"
+                  (click)="delete_cart_item({productId:item.id,variationId:item.variations._id,colorId:item.variations.colors.name})">
+                  Delete</p>
+                <span class="text_grey mx-2">|</span>
+                <p class="text_link underline">Add to Wishlist</p>
+              </div>
+            </div>
+            <div class="cart_item_price_container d-flex flex-column justify-content-center align-items-end">
+              <h3 class="mb-3">
+                &pound;&nbsp;{{calc_product_total(item.variations.price['$numberDecimal'].toLocaleString(),item.variations.colors.color_price['$numberDecimal'].toLocaleString())}}
+              </h3>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="cart_item_price_container"></div>
+      <ng-template #no_cart_data>
+        <hr class="divider">
+        <h3 class="text_secondary pt-5 pb-4 text-center">
+          <b>
+            Your Cart is Empty
+          </b>
+        </h3>
+        <p routerLink="/" class="text_link cursor_pointer hover_underline text-center pb-5">&#9755;&nbsp;Back to Home&nbsp;&#9754;</p>
+      </ng-template>
+      <hr class="divider">
+      <h5 class="mt-4 text-end">Sub Total&nbsp;({{cart_items}}
+        Item)&nbsp;:&nbsp;&pound;&nbsp;{{cart_total['$numberDecimal']?.toLocaleString()}}</h5>
+    </div>
+    <div
+      class="checkout_container sticky-top mb-5 mx-3 p-4 d-flex justify-content-center align-items-start flex-column">
+      <p class="mb-3">Sub Total&nbsp;({{cart_items}}
+        Item)&nbsp;:&nbsp;&pound;&nbsp;{{cart_total['$numberDecimal']?.toLocaleString()}}</p>
+      <p class="mb-4">Delivery Charge&nbsp;:&nbsp;&pound;&nbsp;1.99</p>
+      <h4 class="mb-4">
+        <b>
+          Total&nbsp;:&nbsp;&pound;{{cart_total['$numberDecimal']?.toLocaleString()}}
+        </b>
+      </h4>
+      <button class="btn btn_yellow" routerLink="/checkout">Proceed to Checkout</button>
     </div>
   </div>
 </div>

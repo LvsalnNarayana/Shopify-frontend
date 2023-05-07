@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="my-5">
+    <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="start" id="create_product_form" [disableRipple]="true">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="mat_label_container d-flex justify-content-start align-items-center">
+            <div class="product_form_level_indicator me-3">
+              <img src="assets/images/question.png" class="img_fluid" alt="">
+            </div>
+            <p>
+              Product Info
+            </p>
+          </div>
+        </ng-template>
+        <div class="py-2 ps-5 mx-5 product_form_container">
+          <app-form form_component="seller-create-product-step-1"></app-form>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="mat_label_container d-flex justify-content-start align-items-center">
+            <div class="product_form_level_indicator me-3">
+              <img src="assets/images/question.png" class="img_fluid" alt="">
+            </div>
+            <p>
+              Variations
+            </p>
+          </div>
+        </ng-template>
+        <div class="py-2 ps-5 mx-5 product_form_container">
+          <app-form form_component="seller-create-product-step-2"></app-form>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="mat_label_container d-flex justify-content-start align-items-center">
+            <div class="product_form_level_indicator me-3">
+              <img src="assets/images/question.png" class="img_fluid" alt="">
+            </div>
+            <p>
+              Description
+            </p>
+          </div>
+        </ng-template>
+        <div class="py-2 ps-5 mx-5 product_form_container">
+          <app-form form_component="seller-create-product-step-3"></app-form>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="mat_label_container d-flex justify-content-start align-items-center">
+            <div class="product_form_level_indicator me-3">
+              <img src="assets/images/question.png" class="img_fluid" alt="">
+            </div>
+            <p>
+              Keywords
+            </p>
+          </div>
+        </ng-template>
+        <div class="py-2 ps-5 mx-5 product_form_container">
+          <app-form form_component="seller-create-product-step-4"></app-form>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="mat_label_container d-flex justify-content-start align-items-center">
+            <div class="product_form_level_indicator no_indicator me-3">
+              <img src="assets/images/question.png" class="img_fluid" alt="">
+            </div>
+            <p>
+              Offers
+            </p>
+          </div>
+        </ng-template>
+        <div class="py-2 ps-5 mx-5 product_form_container">
+          <app-form form_component="seller-create-product-step-5"></app-form>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

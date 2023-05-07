@@ -6,6 +6,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { FilterComponent } from './filter/filter.component';
 import { RouterModule } from '@angular/router';
 import { FormComponent } from './form/form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,13 +18,15 @@ import { FormComponent } from './form/form.component';
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,
     ProductCardComponent,
     FilterComponent,
     FormComponent
-  ]
+  ],
+  providers: []
 })
 export class SharedModule { }

@@ -1,0 +1,69 @@
+.payments_container {
+  width: 75%;
+  margin: 0px auto;
+  /* box-shadow: var(--box-shadow-medium);
+  border-radius: var(--border-radius-12);
+  background-color: var(--white); */
+}
+
+.card_type_trigger {
+  aspect-ratio: 324/204;
+  width: 100px;
+  background: linear-gradient(135deg, #E3E3E3 0%, #5D6874 100%);
+  background: linear-gradient(135deg, #f2d50f 0%, #da0641 100%);
+  border-radius: 5px;
+  margin-right: 10px;
+  padding-left: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  border: 0px !important;
+}
+
+.card_type_text {
+  color: white !important;
+  font-size: 7px;
+}
+
+.card_type_image img {
+  max-width: 30px;
+}
+
+.card_container {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  border: var(--border-2px);
+  border-radius: var(--border-radius-12);
+}
+
+.card {
+  aspect-ratio: 324/204;
+  width: 300px;
+  background: linear-gradient(135deg, #f2d50f 0%, #da0641 100%);
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  border: 0px !important;
+}
+
+.card .card_type_text {
+  color: white !important;
+  font-size: 20px;
+}
+
+.card .card_type_image img {
+  max-width: 60px !important;
+}
+
+
+.payments_tab_container{
+  max-height: 50vh !important;
+}

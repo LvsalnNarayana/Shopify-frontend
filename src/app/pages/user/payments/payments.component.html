@@ -1,1 +1,66 @@
-<p>payments works!</p>
+<div class="container">
+  <h2 class="pt-5">
+    <b>
+      Your Payments
+    </b>
+  </h2>
+  <hr class="divider">
+  <div class="payments_container mt-5 pb-4 px-4">
+    <mat-tab-group class="payments_tab_container" disableRipple="true" animationDuration="0ms" id="payments_tab"
+      color="transparent">
+      <div *ngFor="let item of payments;let i = index">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div class="d-flex justify-content-start align-items-center">
+              <div class="card_type_trigger">
+                <p class="card_type_text">
+                  xxxx&nbsp;xxxx&nbsp;xxxx&nbsp;{{item.card_number}}
+                </p>
+                <div class="card_type_image">
+                  <img src="assets/images/visa.png" class="img_fluid icon" alt="">
+                </div>
+              </div>
+              <p>
+                <b>{{item.type}}&nbsp;</b>ending with {{item.card_number}}
+              </p>
+            </div>
+          </ng-template>
+          <div class="card_container">
+            <div class="card">
+              <p class="card_type_text mb-3">
+                {{item.payee_name}}
+              </p>
+              <p class="card_type_text">
+                xxxx&nbsp;xxxx&nbsp;xxxx&nbsp;{{item.card_number}}
+              </p>
+              <div class="card_type_image">
+                <img src="assets/images/visa.png" class="img_fluid" alt="">
+              </div>
+            </div>
+            <div class="card_controller">
+              <button class="btn_no_style text_link mt-5 hover_underline"
+                (click)="edit_payment_dialog_open(i)">Edit</button>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <button class="btn_no_style text_link mt-5 hover_underline"
+                (click)="delete_payment(item.id)">Delete</button>
+            </div>
+          </div>
+        </mat-tab>
+      </div>
+    </mat-tab-group>
+    <div class="d-flex justify-content-center align-items-center pt-5 mt-5">
+      <button class="text_link btn btn_no_style w-250" (click)="add_new_payment_dialog_open()">+&nbsp;Add New
+        Payment</button>
+    </div>
+  </div>
+</div>
+<ng-template #add_payment>
+  <div style="background-color: white;">
+    <app-form form_component="add_new_payment" [dialog]="dialog"></app-form>
+  </div>
+</ng-template>
+<ng-template #edit_payment>
+  <div style="background-color: white;">
+    <app-form form_component="add_new_payment" [dialog]="dialog" [payment_data]="edit_payment_object"></app-form>
+  </div>
+</ng-template>

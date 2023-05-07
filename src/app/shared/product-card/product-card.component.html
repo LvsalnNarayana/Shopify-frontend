@@ -1,20 +1,24 @@
 <div class="product_card_container">
-  <div class="product_card_image_container">
-
+  <div class="product_card_image_container d-flex justify-content-center pt-3">
+    <img style="max-width: 100%;" src="{{data?.variations?.[0]?.colors?.[0]?.image_url}}" alt="">
   </div>
   <div class="product_card_meta_container">
-    <p class="product_brand mt-2 d-flex align-items-center">
-      <span class="me-2">Test Brand</span>
-      <img src="assets/images/verified.png" class="seller_verified img_fluid" alt="">
+    <p class="product_title mt-2 hover_underline cursor_pointer" routerLink="/product/{{data?.id}}">{{(title).length >
+      25? (title
+      | slice:0:25)+'...':(title) }}</p>
+    <p class="product_brand my-2">
+      <span class="me-2">{{data?.brand_name}}</span>
     </p>
-    <p class="product_title my-2">Test Title</p>
     <div class="d-flex justify-content-start align-items-center">
-      <p class="product_price">23.33</p>
-      <p class="product_updated_price mx-4">20.00</p>
+      <p class="product_price">&pound;&nbsp;{{total_value}}</p>
+      <p class="product_updated_price mx-4">&pound;&nbsp;20.00</p>
       <p class="product_discount">3%</p>
     </div>
+    <p class="text_small mt-2">
+      <b>Options&nbsp;:&nbsp;</b>{{data?.variations?.length}}&nbsp;sizes
+    </p>
   </div>
-  <div class="product_favourite_container">
+  <!-- <div class="product_favourite_container">
     <img src="assets/images/favourite.png" class="img_fluid" alt="">
-  </div>
+  </div> -->
 </div>

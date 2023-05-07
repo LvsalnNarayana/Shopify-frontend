@@ -1,0 +1,30 @@
+.mat_label_container {
+  padding-bottom: 70px;
+}
+
+.product_form_level_indicator {
+  width: 30px;
+  height: 30px;
+  position: relative;
+}
+
+.product_form_level_indicator::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 90px;
+  top: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--grey-2);
+  z-index: -1;
+}
+
+.no_indicator::before {
+  content: '';
+  height: 0px !important;
+}
+
+.product_form_container {
+  width: 700px;
+}

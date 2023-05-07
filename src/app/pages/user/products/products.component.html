@@ -16,12 +16,9 @@
       </mat-chip-listbox>
 
       <div class="d-flex justify-content-start align-items-center flex-wrap ">
-        <app-product-card class="product_card"></app-product-card>
-        <app-product-card class="product_card"></app-product-card>
-        <app-product-card class="product_card"></app-product-card>
-        <app-product-card class="product_card"></app-product-card>
-        <app-product-card class="product_card"></app-product-card>
-        <app-product-card class="product_card"></app-product-card>
+        <div class="product_card" *ngFor="let item of product_data">
+          <app-product-card [data]="item"></app-product-card>
+        </div>
       </div>
     </div>
   </div>

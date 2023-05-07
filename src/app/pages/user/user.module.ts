@@ -22,6 +22,7 @@ import { SignupComponent } from './signup/signup.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CartComponent } from './cart/cart.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -49,10 +50,29 @@ import { CartComponent } from './cart/cart.component';
     CommonModule,
     UserRoutingModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   exports: [
+    HomeComponent,
+    AccountComponent,
+    AddressComponent,
+    ContactComponent,
+    LoginComponent,
+    MessageCenterComponent,
+    OrdersComponent,
+    PaymentsComponent,
+    PremiumComponent,
+    ProductComponent,
+    ProductsComponent,
+    SecurityComponent,
+    SellerRegistrationComponent,
+    SettingsComponent,
+    SignupComponent,
+    WalletComponent,
+    CheckoutComponent,
     CartComponent
-  ]
+  ],
+  providers:[]
 })
 export class UserModule { }

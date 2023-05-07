@@ -1,11 +1,12 @@
 <div [ngSwitch]="form_component">
-  <form class="w-250 m-auto" *ngSwitchCase="'login'">
+  <form class="w-250 m-auto" *ngSwitchCase="'login'" [formGroup]="login_form" (ngSubmit)="login()">
     <label for="user_email" class="form_label mb-3"> E-mail </label>
-    <input type="text" name="user_email" id="user_email" class="form_input mb-4" placeholder="Enter your E-mail Id" />
+    <input formControlName="email" type="text" name="user_email" id="user_email" class="form_input mb-4"
+      placeholder="Enter your E-mail Id" />
     <label for="user_password" class="form_label mb-3"> Password </label>
-    <input type="text" name="user_password" id="user_password" class="form_input mb-4"
+    <input formControlName="password" type="password" name="user_password" id="user_password" class="form_input mb-4"
       placeholder="Enter your Password" />
-    <input type="submit" value="Login" class="btn bg_blue text_white mt-4" />
+    <input type="submit" value="Login" class="btn btn_blue text_white mt-4" />
   </form>
   <form class="w-100" *ngSwitchCase="'signup'">
     <label for="user_name" class="form_label mb-3">Your Name</label>
@@ -21,6 +22,243 @@
     <label for="user_confirm_password" class="form_label mb-3">Confirm Password</label>
     <input type="text" name="user_confirm_password" id="user_confirm_password" class="form_input mb-4"
       placeholder="Re-Enter your password" />
-    <input type="submit" value="Signup" class="btn bg_blue text_white mt-4" />
+    <input type="submit" value="Signup" class="btn btn_blue text_white mt-4" />
+  </form>
+  <form *ngSwitchCase="'seller-create-product-step-1'">
+    <div class="mb-5">
+      <label for="" class="form_label_2 mb-2">Title</label>
+      <input type="text" class="form_input">
+    </div>
+    <div class="mb-5">
+      <label for="" class="form_label_2 mb-2">Per Unit Pricing</label>
+      <input type="text" class="form_input">
+    </div>
+    <div class="mb-5">
+      <label for="" class="form_label_2 mb-2">Stock Count</label>
+      <input type="text" class="form_input">
+    </div>
+    <div class="mb-5">
+      <label for="" class="form_label_2 mb-2">Color</label>
+      <input type="text" class="form_input">
+    </div>
+    <div class="mb-5">
+      <label for="" class="form_label_2 mb-2">Brand Name</label>
+      <input type="text" class="form_input">
+    </div>
+    <div class="mb-5">
+      <label for="" class="form_label_2 mb-2">Manufacturer</label>
+      <input type="text" class="form_input">
+    </div>
+    <div class="mb-5">
+      <label for="" class="form_label_2 mb-2">Size</label>
+      <input type="text" class="form_input">
+    </div>
+    <div class="mb-5">
+      <label for="" class="form_label_2 mb-2">Country&nbsp;/&nbsp;Region of Origin</label>
+      <input type="text" class="form_input">
+    </div>
+  </form>
+  <form *ngSwitchCase="'seller-create-product-step-2'">
+    <div class="mt-2">
+      <h3 class="mb-3">
+        No Variations Available
+      </h3>
+      <div class="mb-5 form_border py-4 px-5">
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Title</label>
+          <input type="text" class="form_input">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Per Unit Pricing</label>
+          <input type="text" class="form_input">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Stock Count</label>
+          <input type="text" class="form_input">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Color</label>
+          <input type="text" class="form_input">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Size</label>
+          <input type="text" class="form_input">
+        </div>
+        <div class="mb-5 d-flex justify-content-end align-items-center">
+          <input type="submit" class="btn btn_blue text_white ms-5">
+          <button class="btn mx-5">Cancel</button>
+        </div>
+      </div>
+      <p class="text_link hover_underline mt-5">+ Add Variation</p>
+    </div>
+  </form>
+  <form *ngSwitchCase="'seller-create-product-step-3'">
+    <div class="mt-2">
+      <div class="mb-5 form_border py-4 px-5">
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Description</label>
+          <textarea class="form_text_area" name="" id="" cols="30" rows="10"></textarea>
+        </div>
+        <div class="mb-5">
+          <input type="submit" value="Save" class="w-25 btn btn_blue text_white">
+        </div>
+      </div>
+      <p class="text_link hover_underline mt-5">+ Add Variation</p>
+    </div>
+  </form>
+  <form *ngSwitchCase="'seller-create-product-step-4'">
+    <div class="mt-2">
+      <div class="mb-5 form_border py-4 px-5">
+        <div class="keywords_container mb-5 d-flex flex-wrap">
+          <span class="me-3 my-2 bg_blue text_white border-3 px-4 py-1 border-radius-7">Keyword1</span>
+          <span class="me-3 my-2 bg_blue text_white border-3 px-4 py-1 border-radius-7">Keyword2</span>
+          <span class="me-3 my-2 bg_blue text_white border-3 px-4 py-1 border-radius-7">Keyword3</span>
+          <span class="me-3 my-2 bg_blue text_white border-3 px-4 py-1 border-radius-7">Keyword3</span>
+          <span class="me-3 my-2 bg_blue text_white border-3 px-4 py-1 border-radius-7">Keyword3</span>
+          <span class="me-3 my-2 bg_blue text_white border-3 px-4 py-1 border-radius-7">Keyword3</span>
+          <span class="me-3 my-2 bg_blue text_white border-3 px-4 py-1 border-radius-7">Keyword3</span>
+          <span class="me-3 my-2 bg_blue text_white border-3 px-4 py-1 border-radius-7">Keyword3</span>
+          <span class="me-3 my-2 bg_blue text_white border-3 px-4 py-1 border-radius-7">Keyword3</span>
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Keywords</label>
+          <input type="text" class="form_input">
+        </div>
+        <div class="mb-5">
+          <input type="submit" value="Save" class="w-25 btn btn_blue text_white">
+        </div>
+      </div>
+    </div>
+  </form>
+  <form *ngSwitchCase="'seller-create-product-step-5'">
+    <div class="mt-2">
+      <div class="mb-5 form_border py-4 px-5">
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Product Condition</label>
+          <input type="text" class="form_input">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Your Price</label>
+          <input type="text" class="form_input">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Offer Price</label>
+          <input type="text" class="form_input">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Start Date</label>
+          <input type="date" class="form_input">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">End Date</label>
+          <input type="date" class="form_input">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Offer Description Note</label>
+          <input type="textarea" class="form_text_area">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Max Quantity</label>
+          <input type="text" class="form_input">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Gift</label>
+          <input type="checkbox" class="">
+        </div>
+        <div class="mb-5">
+          <input type="submit" value="Save" class="w-25 btn btn_blue text_white">
+        </div>
+      </div>
+    </div>
+  </form>
+  <form *ngSwitchCase="'add_edit_address'" [formGroup]="add_edit_address" (ngSubmit)="add_edit_address_submit()">
+    <div class="p-relative">
+      <div class="sticky-top form_header pb-2">
+        <div class="d-flex justify-content-between align-items-center pb-3 pt-4 px-4">
+          <h3>{{address_data?"Edit":'Add'}} Address</h3>
+          <div style="width:20px;" class="cursor_pointer" (click)="close_dialog($event)">
+            <img src="assets/images/close.png" class="img_fluid" alt="">
+          </div>
+        </div>
+        <hr class="divider">
+      </div>
+      <div class="px-4 pb-4">
+        <div class="mb-5 mt-3">
+          <label for="" class="form_label_2 mb-2">Name</label>
+          <input type="text" class="form_input" formControlName="name">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Phone</label>
+          <input type="text" class="form_input" formControlName="phone">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Line 1</label>
+          <input type="text" class="form_input" formControlName="line1">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Line 2</label>
+          <input type="text" class="form_input" formControlName="line2">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">City/Town</label>
+          <input type="text" class="form_input" formControlName="city">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Country</label>
+          <input type="text" class="form_input" formControlName="country">
+        </div>
+        <div class="mb-5">
+          <label for="" class="form_label_2 mb-2">Postcode</label>
+          <input type="text" class="form_input" formControlName="postcode">
+        </div>
+        <div class="mb-5">
+          <input type="submit" class="btn btn_yellow">
+        </div>
+      </div>
+    </div>
+  </form>
+  <form *ngSwitchCase="'add_new_payment'" [formGroup]="add_edit_payment" (ngSubmit)="add_edit_payment_submit()">
+    <div class="p-relative">
+      <div class="sticky-top form_header pb-2">
+        <div class="d-flex justify-content-between align-items-center pb-3 pt-4 px-4">
+          <h3>{{payment_data?"Edit":'Add'}} Payment</h3>
+          <div style="width:20px;" class="cursor_pointer" (click)="close_dialog($event)">
+            <img src="assets/images/close.png" class="img_fluid" alt="">
+          </div>
+        </div>
+        <hr class="divider">
+      </div>
+      <div class="d-flex justify-content-center align-items-center">
+        <div class="w-50">
+          <div class="px-4 pb-4">
+            <div class="mb-5 mt-3">
+              <label for="" class="form_label_2 mb-2">Name on Card</label>
+              <input type="text" class="form_input" formControlName="payee_name">
+            </div>
+            <div class="mb-5" *ngIf="!payment_data">
+              <label for="" class="form_label_2 mb-2">Card Number</label>
+              <input type="text" class="form_input" formControlName="card_number">
+            </div>
+            <div class="mb-5">
+              <label for="" class="form_label_2 mb-2">Expiration Date</label>
+              <input type="text" class="form_input" formControlName="card_expiry">
+            </div>
+
+          </div>
+        </div>
+        <div class="w-50">
+          <h1>hello</h1>
+        </div>
+      </div>
+      <hr class="divider">
+      <div class="d-flex justify-content-end align-items-center p-3">
+        <div class="me-4">
+          <button class="btn" (click)="close_dialog($event)">cancel</button>
+        </div>
+        <div>
+          <input type="submit" class="btn btn_yellow">
+        </div>
+      </div>
+    </div>
   </form>
 </div>

@@ -1,9 +1,10 @@
-.account_card{
+.account_card {
   width: 18%;
   background-color: white !important;
-  border-radius: 7px;
-  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius-7);
+  box-shadow: var(--box-shadow-light);
 }
-.account_card:hover{
-  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.1);
+
+.account_card:hover {
+  box-shadow: var(--box-shadow-light-hover);
 }

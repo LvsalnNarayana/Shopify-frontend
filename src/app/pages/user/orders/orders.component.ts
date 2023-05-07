@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent {
-
+  constructor() { }
+  ngOnInit() {}
 }

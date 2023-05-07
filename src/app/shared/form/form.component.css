@@ -5,6 +5,12 @@
   line-height: 18px;
 }
 
+.form_label_2 {
+  display: block;
+  font-size: 16px;
+  width: 100%;
+  line-height: 16px;
+}
 
 .form_input {
   height: 35px;
@@ -14,4 +20,24 @@
   outline: none;
   border: 0px;
   box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.form_border{
+  border: var(--border-2px);
+  border-radius: var(--border-radius-7);
+}
+.form_text_area{
+  height: 350px;
+  min-height: 350px;
+  max-height: 350px;
+  width: 100%;
+  border-radius: 7px;
+  padding: 5px 10px;
+  outline: none;
+  border: 0px;
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.3);
+}
+.form_header{
+  width: 100%;
+  background-color: white !important;
 }
