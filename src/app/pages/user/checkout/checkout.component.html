@@ -1,204 +1,210 @@
 <div class="container py-5">
-  <div class="checkout_container p-4 w-75">
-    <div class="checkout_step">
-      <div class="checkout_step_header d-flex justify-content-start align-items-start position-relative">
-        <div class="position-absolute checkout_step_controller">
-          <button (click)="change_step_state(1)" class="btn_no_style text_link hover_underline"
-            *ngIf="checkout_state.step_1 === false">
-            Change
-          </button>
-          <button (click)="default_step_state()" class="btn_no_style text_link hover_underline"
-            *ngIf="checkout_state.step_1">
-            X&nbsp;Close
-          </button>
-        </div>
-        <div class="checkout_trigger">
-          <h4 class="checkout_trigger_text" [ngClass]="checkout_state.step_1?'text_orange' : ''">
-            <b> 1 Delivery Address </b>
-          </h4>
-        </div>
-        <div class="checkout_default_content" *ngIf="checkout_state.step_1 === false">
-          <p class="my-2"><b>{{default_address.name}}</b></p>
-          <p class="mb-1">{{default_address.phone}}</p>
-          <p class="mb-1">{{default_address.line1}}</p>
-          <p class="mb-1">{{default_address.line2}}</p>
-          <p class="mb-1">{{default_address.city}}</p>
-          <p class="mb-1">{{default_address.country}}</p>
-          <p class="mb-1">{{default_address.postcodes}}</p>
-        </div>
-      </div>
-      <div class="checkout_content p-3 my-3" *ngIf="checkout_state.step_1 === true">
-        <form>
-          <div class="my-2" *ngFor="let item of address">
-            <input type="radio" value="address_id_1" class="address_input" />
-            <label for=""
-              class="d-inline">{{default_address.name}},&nbsp;{{default_address.line1}},&nbsp;{{default_address.line2}},&nbsp;{{default_address.city}},&nbsp;{{default_address.country}},&nbsp;{{default_address.postcode}}
-            </label>
-            <button class="btn_no_style text_link ms-3 d-inline">
-              Edit Address
+  <div class="d-flex justify-content-start align-items-start position-relative mt-5">
+    <div class="checkout_container p-4 w-75">
+      <div class="checkout_step">
+        <div class="checkout_step_header d-flex justify-content-start align-items-start position-relative">
+          <div class="position-absolute checkout_step_controller">
+            <button (click)="change_step_state(1)" class="btn_no_style text_link hover_underline"
+              *ngIf="checkout_state.step_1 === false">
+              Change
+            </button>
+            <button (click)="default_step_state()" class="btn_no_style text_link hover_underline"
+              *ngIf="checkout_state.step_1">
+              X&nbsp;Close
             </button>
           </div>
-        </form>
+          <div class="checkout_trigger">
+            <h4 class="checkout_trigger_text" [ngClass]="checkout_state.step_1?'text_orange' : ''">
+              <b> 1 Delivery Address </b>
+            </h4>
+          </div>
+          <div class="checkout_default_content" *ngIf="checkout_state.step_1 === false">
+            <p class="my-2"><b>{{checkout_address.name}}</b></p>
+            <p class="mb-1">{{checkout_address.phone}}</p>
+            <p class="mb-1">{{checkout_address.line1}}</p>
+            <p class="mb-1">{{checkout_address.line2}}</p>
+            <p class="mb-1">{{checkout_address.city}}</p>
+            <p class="mb-1">{{checkout_address.country}}</p>
+            <p class="mb-1">{{checkout_address.postcodes}}</p>
+          </div>
+        </div>
+        <div class="checkout_content p-3 my-3" *ngIf="checkout_state.step_1 === true">
+          <form [formGroup]="address_form">
+            <div class="my-2" *ngFor="let item of address">
+              <input id="address_input-{{item._id}}" type="radio" value="address_id_1" class="address_input"
+                value="{{item._id}}" formControlName="address" />
+              <label for="address_input-{{item._id}}"
+                class="d-inline">{{item.name}},&nbsp;{{item.line1}},&nbsp;{{item.line2}},&nbsp;{{item.city}},&nbsp;{{item.country}},&nbsp;{{item.postcode}}
+              </label>
+              <button class="btn_no_style text_link ms-3 d-inline">
+                Edit Address
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-    <hr class="divider" />
-    <div class="checkout_step my-4">
-      <div class="checkout_step_header d-flex justify-content-start align-items-start position-relative">
-        <div class="position-absolute checkout_step_controller">
-          <button (click)="change_step_state(2)" class="btn_no_style text_link hover_underline"
-            *ngIf="checkout_state.step_2 == false">
-            Change
-          </button>
-          <button (click)="default_step_state()" class="btn_no_style text_link hover_underline"
-            *ngIf="checkout_state.step_2">
-            X&nbsp;Close
-          </button>
+      <hr class="divider" />
+      <div class="checkout_step my-4">
+        <div class="checkout_step_header d-flex justify-content-start align-items-start position-relative">
+          <div class="position-absolute checkout_step_controller">
+            <button (click)="change_step_state(2)" class="btn_no_style text_link hover_underline"
+              *ngIf="checkout_state.step_2 == false">
+              Change
+            </button>
+            <button (click)="default_step_state()" class="btn_no_style text_link hover_underline"
+              *ngIf="checkout_state.step_2">
+              X&nbsp;Close
+            </button>
+          </div>
+          <div class="checkout_trigger">
+            <h4 class="checkout_trigger_text" [ngClass]="checkout_state.step_2?'text_orange' : ''">
+              <b> 2 Payment Information </b>
+            </h4>
+          </div>
+          <div class="checkout_default_content" *ngIf="checkout_state.step_2 == false">
+            <b>{{checkout_payment.type}}</b>&nbsp;ending in {{checkout_payment.card_number}}
+            <p class="my-2">
+              <span class="text_link hover_underline">Billing Address</span>&nbsp;:&nbsp;same as shipping address
+            </p>
+            <form>
+              <label for="gift_card_voucher_input"> Add Gift Card/Voucher code&nbsp;:&nbsp; </label>
+              <input type="text" id="gift_card_voucher_input" />
+            </form>
+          </div>
         </div>
-        <div class="checkout_trigger">
-          <h4 class="checkout_trigger_text" [ngClass]="checkout_state.step_2?'text_orange' : ''">
-            <b> 2 Payment Information </b>
+        <div class="checkout_content p-3 m-3" *ngIf="checkout_state.step_2 == true">
+          <h4 class="mb-2">
+            <b> Your Cards </b>
           </h4>
-        </div>
-        <div class="checkout_default_content" *ngIf="checkout_state.step_2 == false">
-          <b>{{default_payment.type}}</b>&nbsp;ending in {{default_payment.card_number}}
-          <p class="my-2">
-            <span class="text_link hover_underline">Billing Address</span>&nbsp;:&nbsp;same as shipping address
-          </p>
-          <form>
-            <label for=""> Add Gift Card/Voucher code&nbsp;:&nbsp; </label>
+          <hr class="divider" />
+          <form [formGroup]="payment_form">
+            <table style="width: 100%" class="mt-3">
+              <tr>
+                <th></th>
+                <th>Name on Card</th>
+                <th>Expiry Date</th>
+              </tr>
+              <tr *ngFor="let item of payments">
+                <td style="width: 65%" class="py-2">
+                  <input type="radio" value="{{item.id}}" class="address_input" id="payment_input_{{item.id}}"
+                    formControlName="payment" />
+                  <label for="payment_input_{{item.id}}"> <b>{{item.type}}&nbsp;</b>card ending with
+                    {{item.card_number}} </label>
+                </td>
+                <td style="width: 20%" class="py-2">{{item.payee_name}}</td>
+                <td style="width: 15%" class="py-2">{{item.card_expiry}}</td>
+              </tr>
+            </table>
+          </form>
+          <h4 class="mt-4 mb-2">
+            <b> Your Available Balance </b>
+          </h4>
+          <hr class="divider" />
+          <form class="mt-3">
+            Enter Gift Card or Coupon Code&nbsp;:&nbsp;
             <input type="text" />
           </form>
         </div>
       </div>
-      <div class="checkout_content p-3 m-3" *ngIf="checkout_state.step_2 == true">
-        <h4 class="mb-2">
-          <b> Your Cards </b>
-        </h4>
-        <hr class="divider" />
-        <form>
-          <table style="width: 100%" class="mt-3">
-            <tr>
-              <th></th>
-              <th>Name on Card</th>
-              <th>Expiry Date</th>
-            </tr>
-            <tr *ngFor="let item of payments">
-              <td style="width: 65%" class="py-2">
-                <input type="radio" value="address_id_1" class="address_input" />
-                <label for=""> <b>{{item.type}}&nbsp;</b>card ending with {{item.card_number}} </label>
-              </td>
-              <td style="width: 20%" class="py-2">{{item.payee_name}}</td>
-              <td style="width: 15%" class="py-2">{{item.card_expiry}}</td>
-            </tr>
-          </table>
-        </form>
-        <h4 class="mt-4 mb-2">
-          <b> Your Available Balance </b>
-        </h4>
-        <hr class="divider" />
-        <form class="mt-3">
-          Enter Gift Card or Coupon Code&nbsp;:&nbsp;
-          <input type="text" />
-        </form>
-      </div>
-    </div>
-    <hr class="divider" />
-    <div class="checkout_step my-4">
-      <div class="checkout_step_header d-flex justify-content-start align-items-start position-relative">
-        <div class="position-absolute checkout_step_controller">
-          <button class="btn w-auto" style="font-size: 12px" (click)="change_step_state(3)"
-            *ngIf="checkout_state.step_3 == false">
-            Review Order
-          </button>
+      <hr class="divider" />
+      <div class="checkout_step my-4">
+        <div class="checkout_step_header d-flex justify-content-start align-items-start position-relative">
+          <div class="position-absolute checkout_step_controller">
+            <button class="btn w-auto" style="font-size: 12px" (click)="change_step_state(3)"
+              *ngIf="checkout_state.step_3 == false">
+              Review Order
+            </button>
+          </div>
+          <div class="checkout_trigger">
+            <h4 class="checkout_trigger_text" [ngClass]="checkout_state.step_3?'text_orange' : ''">
+              <b> 3 Review Items & Devlivery </b>
+            </h4>
+          </div>
+          <div class="checkout_default_content pe-5 pt-3" *ngIf="checkout_state.step_3 == false">
+            <div *ngFor="let item of cart_data">
+              <div class="review_product">
+                <p class="text_green mb-3">
+                  <b>
+                    Deliver Date : 19-Jan-2023
+                  </b>
+                </p>
+                <div class=" d-flex justify-content-start align-items-start">
+                  <div class="review_product_img d-flex align-items-center justify-content-center">
+                    <img src="{{item.variations.colors.image_url}}" alt="">
+                  </div>
+                  <div class="review_product_meta ms-4">
+                    <h5 class="mt-1">{{item.title}}({{item.variations.name}}) -
+                      {{item.variations.colors.name}}</h5>
+                    <p class="pt-2">
+                      <b>&pound;&nbsp;{{calc_product_total(item.variations.price['$numberDecimal'].toLocaleString(),item.variations.colors.color_price['$numberDecimal'].toLocaleString())}}</b>
+                    </p>
+                    <p class="pt-3">
+                      Quantity : {{item.quantity}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <hr class="divider my-3" />
+            </div>
+          </div>
         </div>
-        <div class="checkout_trigger">
-          <h4 class="checkout_trigger_text" [ngClass]="checkout_state.step_3?'text_orange' : ''">
-            <b> 3 Review Items & Devlivery </b>
-          </h4>
-        </div>
-        <div class="checkout_default_content pe-5 pt-3" *ngIf="checkout_state.step_3 == false">
+        <div class="checkout_content my-3 p-3" *ngIf="checkout_state.step_3 == true">
           <div *ngFor="let item of cart_data">
-            <div class="review_product">
-              <p class="text_green mb-3">
-                <b>
-                  Deliver Date : 19-Jan-2023
-                </b>
-              </p>
-              <div class=" d-flex justify-content-start align-items-start">
-                <div class="review_product_img d-flex align-items-center justify-content-center">
+            <div class="review_product_checkout">
+              <h5 class="text_green mb-4">
+                <b> Delivery Date : 19-Jan-2023 </b>
+              </h5>
+              <div class="d-flex justify-content-start align-items-stretch review_product_container">
+                <div class="review_product_checkout_img_container d-flex align-items-center justify-content-center">
                   <img src="{{item.variations.colors.image_url}}" alt="">
                 </div>
-                <div class="review_product_meta ms-4">
-                  <h5 class="mt-1">{{item.title}}({{item.variations.name}}) -
-                    {{item.variations.colors.name}}</h5>
-                  <p class="pt-2">
-                    <b>&pound;&nbsp;{{calc_product_total(item.variations.price['$numberDecimal'].toLocaleString(),item.variations.colors.color_price['$numberDecimal'].toLocaleString())}}</b>
+                <div class="review_product_checkout_meta_container ms-5">
+                  <h4 class="my-2">{{item.title}}({{item.variations.name}}) -
+                    {{item.variations.colors.name}}</h4>
+                  <b>&pound;&nbsp;{{calc_product_total(item.variations.price['$numberDecimal'].toLocaleString(),item.variations.colors.color_price['$numberDecimal'].toLocaleString())}}</b>
+                  <div class="d-flex justify-content-start align-items-center py-3">
+                    <img style="width: 20px" src="assets/images/crown.png" alt="" />&nbsp;Premium
+                  </div>
+                  <div class="quantity_control d-flex justify-content-start align-items-center me-3">
+                    <button class="btn_no_style px-3 py-2 cursor_pointer"
+                      (click)="update_cart_quantity({productId:item.id,variationId:item.variations._id,colorId:item.variations.colors.name},'INCREMENT')">
+                      <b>+</b>
+                    </button>
+                    <p class="px-1 h-100" style="cursor: default">
+                      <span class="text_grey">|</span>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <b>{{item.quantity}}</b>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <span class="text_grey">|</span>
+                    </p>
+                    <button class="btn_no_style px-3 py-2 cursor_pointer"
+                      (click)="update_cart_quantity({productId:item.id,variationId:item.variations._id,colorId:item.variations.colors.name},'DECREMENT')">
+                      <b>-</b>
+                    </button>
+                  </div>
+                  <p class="mt-4">
+                    <b> seller&nbsp;:&nbsp; </b>
                   </p>
-                  <p class="pt-3">
-                    Quantity : {{item.quantity}}
-                  </p>
+                </div>
+                <div class="review_product_checkout_delivery_controls ms-5">
+                  <form>
+                    <div class="d-flex align-items-start">
+                      <input type="radio" value="address_id_1" class="address_input my-2" id="shipping_speed_1" />
+                      <label for="shipping_speed_1">Free Delivery by 16-Jan-2023 by Premium Subscription</label>
+                    </div>
+                    <div class="d-flex align-items-start mt-3">
+                      <input type="radio" value="address_id_1" class="address_input my-1" id="shipping_speed_2" />
+                      <label for="shipping_speed_2">Priority Delivery by
+                        15-Jan-2023&nbsp;-&nbsp;&pound;&nbsp;1.99</label>
+                    </div>
+                  </form>
+                  <button class="btn_no_style text_link mt-3">Change Delivery</button>
                 </div>
               </div>
             </div>
-            <hr class="divider my-3" />
+            <hr class="divider my-4" />
+
           </div>
-        </div>
-      </div>
-      <div class="checkout_content my-3 p-3" *ngIf="checkout_state.step_3 == true">
-        <div *ngFor="let item of cart_data">
-          <div class="review_product_checkout">
-            <h5 class="text_green mb-4">
-              <b> Delivery Date : 19-Jan-2023 </b>
-            </h5>
-            <div class="d-flex justify-content-start align-items-stretch review_product_container">
-              <div class="review_product_checkout_img_container d-flex align-items-center justify-content-center">
-                <img src="{{item.variations.colors.image_url}}" alt="">
-              </div>
-              <div class="review_product_checkout_meta_container ms-5">
-                <h4 class="my-2">{{item.title}}({{item.variations.name}}) -
-                  {{item.variations.colors.name}}</h4>
-                <b>&pound;&nbsp;{{calc_product_total(item.variations.price['$numberDecimal'].toLocaleString(),item.variations.colors.color_price['$numberDecimal'].toLocaleString())}}</b>
-                <div class="d-flex justify-content-start align-items-center py-3">
-                  <img style="width: 20px" src="assets/images/crown.png" alt="" />&nbsp;Premium
-                </div>
-                <div class="quantity_control d-flex justify-content-start align-items-center me-3">
-                  <button class="btn_no_style px-3 py-2 cursor_pointer"
-                    (click)="update_cart_quantity({productId:item.id,variationId:item.variations._id,colorId:item.variations.colors.name},'INCREMENT')">
-                    <b>+</b>
-                  </button>
-                  <p class="px-1 h-100" style="cursor: default">
-                    <span class="text_grey">|</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <b>{{item.quantity}}</b>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="text_grey">|</span>
-                  </p>
-                  <button class="btn_no_style px-3 py-2 cursor_pointer"
-                    (click)="update_cart_quantity({productId:item.id,variationId:item.variations._id,colorId:item.variations.colors.name},'DECREMENT')">
-                    <b>-</b>
-                  </button>
-                </div>
-                <p class="mt-4">
-                  <b> seller&nbsp;:&nbsp; </b>
-                </p>
-              </div>
-              <div class="review_product_checkout_delivery_controls ms-5">
-                <form>
-                  <div class="d-flex align-items-start">
-                    <input type="radio" value="address_id_1" class="address_input my-2" />
-                    <label for="">Free Delivery by 16-Jan-2023 by Premium Subscription</label>
-                  </div>
-                  <div class="d-flex align-items-start mt-3">
-                    <input type="radio" value="address_id_1" class="address_input my-1" />
-                    <label for="">Priority Delivery by
-                      15-Jan-2023&nbsp;-&nbsp;&pound;&nbsp;1.99</label>
-                  </div>
-                </form>
-                <button class="btn_no_style text_link mt-3">Change Delivery</button>
-              </div>
-            </div>
-          </div>
-          <hr class="divider my-4" />
           <h4 class="mb-4 text-end">
             <b>
               Total&nbsp;:&nbsp;&pound;{{cart_total['$numberDecimal']?.toLocaleString()}}
@@ -206,6 +212,17 @@
           </h4>
         </div>
       </div>
+    </div>
+    <div
+      class="checkout_control_container sticky-top mb-5 mx-3 p-4 d-flex justify-content-center align-items-start flex-column">
+      <h4 class="mb-4">
+        <b>
+          Total&nbsp;:&nbsp;&pound;{{cart_total['$numberDecimal']?.toLocaleString()}}
+        </b>
+      </h4>
+      <button class="btn btn_yellow" (click)="place_order()">Buy Now</button>
+      <span style="font-size: 14px;" class="mt-4">By placing your order you agree to Shopify's Conditions of Use & Sale.
+        Please see our Privacy Notice, our Cookies Notice.</span>
     </div>
   </div>
 </div>

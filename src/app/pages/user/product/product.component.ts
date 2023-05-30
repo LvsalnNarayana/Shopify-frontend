@@ -33,8 +33,6 @@ export class ProductComponent {
     });
     this.global.product.subscribe((data: any) => {
       this.product_data = data;
-      console.log(this.product_data);
-
       this.total_value = (parseFloat(data?.variations?.[this.current_variation]?.price['$numberDecimal']) + parseFloat(data?.variations?.[this.current_variation]?.colors?.[this.current_color]?.color_price['$numberDecimal'])).toFixed(2);
     });
     this.global.default_address.subscribe((data:any) => {

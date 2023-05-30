@@ -20,7 +20,10 @@ export class LoginComponent {
       this.login_auth_status = data;
     });
     this.global.user.subscribe((data: any) => {
-      this.username = data.username;
+      this.username = data?.username;
+      console.log(this.username);
+      console.log(this.login_auth_status);
+
     })
   }
 }

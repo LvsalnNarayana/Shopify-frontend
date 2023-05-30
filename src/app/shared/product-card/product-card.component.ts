@@ -13,8 +13,6 @@ export class ProductCardComponent {
   ngOnInit(){
     this.title = this.data?.title+
     '&nbsp;('+this.data?.variations?.[0]?.name+')&nbsp;-&nbsp;' + this.data?.variations?.[0]?.colors?.[0]?.name;
-    console.log(this.title);
-
     this.total_value = (parseFloat(this.data?.variations?.[0]?.price['$numberDecimal']) + parseFloat(this.data?.variations?.[0]?.colors?.[0]?.color_price['$numberDecimal'])).toFixed(2)
   }
 }

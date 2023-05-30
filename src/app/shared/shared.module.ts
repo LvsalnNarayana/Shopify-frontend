@@ -6,7 +6,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { FilterComponent } from './filter/filter.component';
 import { RouterModule } from '@angular/router';
 import { FormComponent } from './form/form.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     MaterialModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     HeaderComponent,

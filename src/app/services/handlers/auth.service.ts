@@ -15,7 +15,6 @@ export class AuthService {
     private socket: SocketService,
     private user: UserService,
     private router: Router,
-    private product: ProductService
   ) { }
   async init(): Promise<any> {
     this.CHECK_AUTH_STATUS();
@@ -26,10 +25,6 @@ export class AuthService {
       this.global.auth_status.next(data.loggedin);
       if (data.loggedin == true) {
         this.user.GET_USER();
-        // this.user.POST_USER_CART('6424b4f4050b5b1833e112d4')
-        // this.user.POST_USER_CART('643f1988a83aa012f48bcb93')
-        // this.user.UPDATE_USER_CART_ITEM('6424b4f4050b5b1833e112d4','INCREMENT')
-        // this.user.UPDATE_USER({ username: "test_user8", mobile: "0000000000" })
         this.user.GET_USER_CART();
         this.user.GET_USER_ORDER();
         this.user.GET_USER_WISHLIST();

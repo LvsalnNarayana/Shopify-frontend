@@ -5,8 +5,9 @@ import { AsyncSubject, BehaviorSubject, ReplaySubject, map } from 'rxjs';
   providedIn: 'root'
 })
 export class GlobalService {
-  cookie_status = new BehaviorSubject(false);
-  socket_status = new BehaviorSubject(false);
+  cookie_status = new ReplaySubject(1);
+  socket_status = new ReplaySubject(1);
+  is_seller = new ReplaySubject(1);
   products = new ReplaySubject(1);
   product = new ReplaySubject(1);
   auth_status = new ReplaySubject(1);

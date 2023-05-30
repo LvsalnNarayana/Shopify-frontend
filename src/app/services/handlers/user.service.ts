@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SocketService } from '../socket/socket.service';
 import { GlobalService } from '../global.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -10,18 +11,22 @@ export class UserService {
   constructor(
     private socket: SocketService,
     private global: GlobalService,
+    private router: Router
   ) { }
 
   POST_CREATE_USER() {
     this.socket.emit('POST_CREATE_USER_REQUEST', {});
     this.socket.listen('POST_CREATE_USER_RESPONSE').subscribe((data: any) => {
-      console.log(data);
+
     });
   }
 
   GET_USER() {
     this.socket.emit('GET_USER_REQUEST', {});
     this.socket.listen('GET_USER_RESPONSE').subscribe((data: any) => {
+      if (data == null && data == undefined) {
+        this.router.navigate(['/login']);
+      }
       this.global.user.next(data);
     });
   }
@@ -29,14 +34,13 @@ export class UserService {
   VERIFY_USER() {
     this.socket.emit('VERIFY_USER_REQUEST', {});
     this.socket.listen('VERIFY_USER_RESPONSE').subscribe((data: any) => {
-      console.log(data)
+
     });
   }
 
   UPDATE_USER(data: any) {
     this.socket.emit('UPDATE_USER_REQUEST', data);
     this.socket.listen('UPDATE_USER_RESPONSE').subscribe((data: any) => {
-      console.log(data);
       this.global.user.next(data);
     });
   }
@@ -48,8 +52,8 @@ export class UserService {
     });
   }
 
-  POST_CREATE_ORDER() {
-    this.socket.emit('POST_CREATE_ORDER_REQUEST', {});
+  POST_CREATE_ORDER(data: any) {
+    this.socket.emit('POST_CREATE_ORDER_REQUEST', data);
     this.socket.listen('POST_CREATE_ORDER_RESPONSE').subscribe((data: any) => {
       this.global.orders.next(data);
     });
@@ -204,6 +208,10 @@ export class UserService {
     this.socket
       .listen('DELETE_USER_ADDRESS_RESPONSE')
       .subscribe((data: any) => {
+        const default_address = data.filter((address: any) => {
+          return address.is_default == true;
+        });
+        this.global.default_address.next(default_address[0]);
         this.global.address.next(data);
       });
   }
@@ -225,6 +233,8 @@ export class UserService {
     this.socket.emit('UPDATE_USER_MEMBERSHIP_REQUEST', {});
     this.socket
       .listen('UPDATE_USER_MEMBERSHIP_RESPONSE')
-      .subscribe((data: any) => { console.log(data) });
+      .subscribe((data: any) => {
+
+      });
   }
 }

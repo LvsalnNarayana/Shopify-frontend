@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError } from 'rxjs';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class HttpService {
   ) { }
   get(url: string) {
     return new Observable((Subscriber: any) => {
-      this.http.get(url, { withCredentials: true }).pipe(
+      this.http.get(url, {withCredentials: true }).pipe(
         catchError(error => {
           Subscriber.next(error);
           return [error];

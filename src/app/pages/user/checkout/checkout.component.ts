@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/services/global.service';
 import { UserService } from 'src/app/services/handlers/user.service';
@@ -13,15 +14,36 @@ export class CheckoutComponent {
   cart_items: any = 0;
   cart_total: any = 0;
   address: any = [];
-  default_address: any = {};
+  checkout_address: any = {};
   payments: any = [];
-  default_payment: any = {};
+  checkout_payment: any = {};
+  checkout_data: any = {};
+  address_form!: FormGroup;
+  payment_form!: FormGroup;
   constructor(
     private global: GlobalService,
     private user: UserService,
     private router: Router
   ) { }
   ngOnInit() {
+    this.address_form = new FormGroup({
+      'address': new FormControl(null)
+    });
+    this.address_form.get('address')?.valueChanges.subscribe((data) => {
+      this.checkout_address = this.address?.filter((address: any) => {
+        return address._id == data;
+      })[0];
+      this.checkout_data['addressId'] = this.checkout_address._id;
+    });
+    this.payment_form = new FormGroup({
+      'payment': new FormControl(null)
+    });
+    this.payment_form.get('payment')?.valueChanges.subscribe((data) => {
+      this.checkout_payment = this.payments?.filter((payment: any) => {
+        return payment.id == data;
+      })[0];
+      this.checkout_data['paymentId'] = this.checkout_payment.id;
+    });
     this.global.cart.subscribe((data: any) => {
       if (data.products.length < 1) {
         this.router.navigateByUrl('/cart')
@@ -31,20 +53,28 @@ export class CheckoutComponent {
       this.cart_items = data.products.reduce((total: any, data: any) => {
         return total + data.quantity;
       }, 0);
-    });
-    this.global.default_address.subscribe((data: any) => {
-      this.default_address = data
+      this.checkout_data['products'] = this.cart_data.map((data: any) => {
+        return { productId: data?.id, variationId: data?.variations?._id, colorId: data?.variations?.colors?.name, quantity: data.quantity }
+      });
+      this.checkout_data['total'] = this.cart_total;
     });
     this.global.address.subscribe((data: any) => {
       this.address = data;
+      const checkout_default_address = data.filter((address: any) => {
+        return address.is_default == true;
+      });
+      this.checkout_address = checkout_default_address[0];
+      this.checkout_data?.['addressId'] === undefined ? this.address_form?.get('address')?.setValue(this.checkout_address._id) : null;
     });
     this.global.payments.subscribe((data: any) => {
       this.payments = data;
+      const checkout_default_payment = data.filter((address: any) => {
+        return address.default_payment == true;
+      });
+      this.checkout_payment = checkout_default_payment[0];
+      this.checkout_data?.['paymentId'] === undefined ? this.payment_form?.get('payment')?.setValue(this.checkout_payment.id) : null;
     });
-    this.global.default_payment.subscribe((data: any) => {
-      this.default_payment = data
-    });
-  }
+  };
   update_cart_quantity(data: any, operator: any) {
     this.user.UPDATE_USER_CART_ITEM(data, operator);
   }
@@ -54,6 +84,7 @@ export class CheckoutComponent {
     step_3: true
   };
   change_step_state(state: Number) {
+
     switch (state) {
       case 1:
         this.checkout_state = {
@@ -95,4 +126,8 @@ export class CheckoutComponent {
   calc_product_total(variation_value: any, color_value: any) {
     return (parseFloat(variation_value) + parseFloat(color_value)).toFixed(2)
   }
+  place_order() {
+    this.user.POST_CREATE_ORDER(this.checkout_data)
+  }
+
 }

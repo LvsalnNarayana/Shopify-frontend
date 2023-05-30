@@ -10,5 +10,34 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container> -->
-<app-header *ngIf="!user_route_checked"></app-header>
-<router-outlet></router-outlet>
+<div *ngIf="!site_loader_status ; else site_loader">
+  <app-header *ngIf="!user_route_checked && !connection_error"></app-header>
+  <div *ngIf="!connection_error ; else oops_message">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<ng-template #oops_message>
+  <div style="height: 100vh;" class="d-flex justify-content-center align-items-center flex-column">
+    <div class="oops_img_container">
+      <img class="img_fluid" src="assets/images/oops.png" alt="">
+    </div>
+    <h4 class="my-3 py-3">
+      <b>
+        oops..! There is a problem with connection.
+      </b>
+    </h4>
+    <button class="btn btn_blue text_white w-250" (click)="reload()">Reload</button>
+  </div>
+</ng-template>
+<ng-template #site_loader>
+  <div style="height: 100vh;" class="w-100 d-flex justify-content-center align-items-center flex-column">
+    <h1 style="font-size: 60px;" class="cursor_pointer pen_script">Shopify</h1>
+    <div style="height:20px;" class="loader mt-4">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+</ng-template>

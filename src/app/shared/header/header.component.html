@@ -4,13 +4,13 @@
       <div class="logo">
         <a class="brand_logo cursor_pointer pen_script text_white" routerLink='/products'>Shopify</a>
       </div>
-      <div class="search_bar_container">
+      <div *ngIf="!is_seller_logged" class="search_bar_container">
         <form>
           <input type="text" name="search_bar" id="search_bar" class="search_bar" placeholder="Search any product">
         </form>
       </div>
-      <div class="user_panel d-flex align-items-center justify-content-end">
-        <div *ngIf="header_auth_status && username !== '' ;  else signin"
+      <div *ngIf="!is_seller_logged" class="user_panel d-flex align-items-center justify-content-end">
+        <div *ngIf="header_auth_status && username !== '' && username !== null && username !== undefined ;  else signin"
           class="user_meta_container d-flex align-items-center me-4" [matMenuTriggerFor]="menu">
           <div class="user_avatar me-2">
             <img class="user_avatar_img img_fluid" src="assets/images/man.png" alt="">
@@ -105,7 +105,7 @@
           </button>
         </mat-menu>
         <div class="user_cart_container d-flex align-items-center" routerLink="/cart"
-          *ngIf="header_auth_status && username !== ''">
+          *ngIf="header_auth_status && username !== ''&& username !== null&& username !== undefined">
           <div class="user_cart_img me-2">
             <img src="assets/images/shopping-cart.png" class="img_fluid" alt="">
           </div>

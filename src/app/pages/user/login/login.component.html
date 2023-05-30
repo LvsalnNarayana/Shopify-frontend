@@ -2,7 +2,8 @@
   <div class="d-flex justify-content-center align-items-center">
     <div class="login_container d-flex justify-content-center align-items-center flex-column">
       <h1 class="pen_script mb-5">Shopify</h1>
-      <div *ngIf="!login_auth_status ; else logged_in">
+      <div
+        *ngIf="!login_auth_status && username !== null && username !== undefined  ; else logged_in">
         <app-form form_component="login"></app-form>
         <p routerLink="forgot-password" class="pt-5">Forgot your password?</p>
         <p class="pt-4">Don't have an Account? <a routerLink="/signup">Sign up</a></p>

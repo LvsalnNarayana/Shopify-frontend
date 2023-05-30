@@ -24,75 +24,167 @@
       placeholder="Re-Enter your password" />
     <input type="submit" value="Signup" class="btn btn_blue text_white mt-4" />
   </form>
-  <form *ngSwitchCase="'seller-create-product-step-1'">
+  <form class="py-2" [formGroup]="product_form_step_1" *ngSwitchCase="'seller-create-product-step-1'">
     <div class="mb-5">
-      <label for="" class="form_label_2 mb-2">Title</label>
-      <input type="text" class="form_input">
+      <label for="" class="form_label_2 mb-2">Title *</label>
+      <input type="text" formControlName="title" class="form_input" />
+      <p *ngIf="product_form_step_1.controls['title'].touched && !product_form_step_1.controls['title'].valid"
+        class="form_hint my-3 text_red">Please Enter Title</p>
     </div>
     <div class="mb-5">
-      <label for="" class="form_label_2 mb-2">Per Unit Pricing</label>
-      <input type="text" class="form_input">
-    </div>
-    <div class="mb-5">
-      <label for="" class="form_label_2 mb-2">Stock Count</label>
-      <input type="text" class="form_input">
-    </div>
-    <div class="mb-5">
-      <label for="" class="form_label_2 mb-2">Color</label>
-      <input type="text" class="form_input">
+      <label for="" class="form_label_2 mb-2">Description</label>
+      <p class="form_hint my-3 text_grey_2">Seperate the points of Description with '&nbsp;;&nbsp;'</p>
+      <textarea formControlName="description" class="form_text_area" name="" id="" cols="30" rows="10"></textarea>
+      <p *ngIf="product_form_step_1.controls['description'].touched && !product_form_step_1.controls['description'].valid"
+        class="form_hint my-3 text_red">Please Enter Description of the Product</p>
     </div>
     <div class="mb-5">
       <label for="" class="form_label_2 mb-2">Brand Name</label>
-      <input type="text" class="form_input">
+      <input formControlName="brand_name" type="text" class="form_input" />
+      <p *ngIf="product_form_step_1.controls['brand_name'].touched && !product_form_step_1.controls['brand_name'].valid"
+        class="form_hint my-3 text_red">Please Enter Brand Name of the Product</p>
     </div>
     <div class="mb-5">
       <label for="" class="form_label_2 mb-2">Manufacturer</label>
-      <input type="text" class="form_input">
-    </div>
-    <div class="mb-5">
-      <label for="" class="form_label_2 mb-2">Size</label>
-      <input type="text" class="form_input">
+      <input formControlName="manufacturer" type="text" class="form_input" />
+      <p *ngIf="product_form_step_1.controls['manufacturer'].touched && !product_form_step_1.controls['manufacturer'].valid"
+        class="form_hint my-3 text_red">Please Enter Manufacturer of the Product</p>
     </div>
     <div class="mb-5">
       <label for="" class="form_label_2 mb-2">Country&nbsp;/&nbsp;Region of Origin</label>
-      <input type="text" class="form_input">
+      <input formControlName="country_of_origin" type="text" class="form_input" />
+      <p *ngIf="product_form_step_1.controls['country_of_origin'].touched && !product_form_step_1.controls['country_of_origin'].valid"
+        class="form_hint my-3 text_red">Please Enter Country of Origin of the Product</p>
+    </div>
+    <h1 class="mb-5">
+      <b> Specifications </b>
+    </h1>
+    <div class="mb-5" *ngFor="
+    let specification of specifications;let i = index">
+      <div *ngFor="let specification_category of getValue(specification) | keyvalue">
+        <h2 class="mb-4">
+          <b>
+            {{ specification_category.key }}
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button *ngIf="!specification_control.edit_specification_status" class="btn_no_style"
+              (click)="edit_specification(specification_category.key)">
+              <img src="assets/images/edit.png" style="max-width: 30px" alt="" />
+            </button>
+          </b>
+        </h2>
+        <div *ngFor="let specification_properties of getValue(specification_category?.value) | keyvalue">
+          <div class="d-flex justify-content-between align-items-center py-3">
+            <input disabled value="{{ specification_properties.key }}" name="specification_key" type="text"
+              class="form_input me-3" />
+            <span>:</span>
+            <input disabled value="{{ specification_properties.value }}" name="specification_value" type="text"
+              class="form_input mx-3" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-5" *ngIf="specification_control.show_specification_category">
+      <div class="d-flex justify-content-between align-items-center mb-5">
+        <input [ngModelOptions]="{ standalone: true }" name="specification_category" type="text" class="form_input"
+          [(ngModel)]="specification_control.specification_category" />
+      </div>
+      <div *ngFor="let item of specification_control.specification | keyvalue"
+        class="d-flex justify-content-between align-items-center mb-3">
+        <input disabled value="{{ item.key }}" name="specification_key" type="text" class="form_input me-3" />
+        <span>:</span>
+        <input disabled value="{{ item.value }}" name="specification_value" type="text" class="form_input mx-3" />
+        <button class="btn_no_style" (click)="delete_specification(item.key)">
+          <img src="assets/images/delete.png" style="max-width: 25px" alt="" />
+        </button>
+      </div>
+      <p *ngIf="specification_control.show_specification" class="pt-3 pb-2">
+        Add Specification parameter and values
+      </p>
+      <div *ngIf="specification_control.show_specification" class="d-flex justify-content-between align-items-center">
+        <input [ngModelOptions]="{ standalone: true }" name="specification_key" type="text" class="form_input me-3"
+          [(ngModel)]="specification_control.specification_key" (input)="check_specification_exists($event)" />
+        <span>:</span>
+        <input
+          [disabled]="specification_control.specification_key === '' || !specification_control.check_specification_key"
+          [ngModelOptions]="{ standalone: true }" name="specification_value" type="text" class="form_input mx-3"
+          [(ngModel)]="specification_control.specification_value" (keydown)="test_func($event)" />
+        <button class="btn_no_style" (click)="add_sepcification()">
+          <img src="assets/images/save.png" style="max-width: 25px" alt="" />
+        </button>
+      </div>
+      <p *ngIf="!specification_control.check_specification_key" class="text_red my-2">
+        Property Already Exists
+      </p>
+      <p *ngIf="specification_control.specification_category !== '' && specification_control.show_specification === false"
+        class="text_link hover_underline mt-5 cursor_pointer text-center"
+        (click)="specification_control.show_specification = true">
+        + Add Specification
+      </p>
+      <div class="d-flex justify-content-end align-items-center mt-5">
+        <button style="width: fit-content" class="btn btn_blue text_white py-2 px-3 me-3"
+          (click)="save_specification_category()">
+          Save
+        </button>
+        <button style="width: fit-content" class="btn btn_blue_border text_white py-2 px-3"
+          (click)="cancel_specification('specification_category')">
+          Cancel
+        </button>
+      </div>
+    </div>
+    <p *ngIf="!specification_control.show_specification_category"
+      class="text_link hover_underline mt-5 cursor_pointer text-center"
+      (click)="specification_control.show_specification_category = true">
+      + Add Specification Category
+    </p>
+    <div class="d-flex justify-content-end">
+      <button [disabled]="product_form_step_1.invalid" class="btn btn_blue text_white mb-3 mt-5 w-250">Next</button>
     </div>
   </form>
-  <form *ngSwitchCase="'seller-create-product-step-2'">
+  <form class="py-2" *ngSwitchCase="'seller-create-product-step-2'">
     <div class="mt-2">
-      <h3 class="mb-3">
-        No Variations Available
-      </h3>
+      <h3 class="mb-3">No Variations Available</h3>
       <div class="mb-5 form_border py-4 px-5">
         <div class="mb-5">
-          <label for="" class="form_label_2 mb-2">Title</label>
-          <input type="text" class="form_input">
+          <label for="" class="form_label_2 mb-2">Name</label>
+          <input type="text" class="form_input" />
         </div>
         <div class="mb-5">
           <label for="" class="form_label_2 mb-2">Per Unit Pricing</label>
-          <input type="text" class="form_input">
+          <input type="text" class="form_input" />
         </div>
-        <div class="mb-5">
-          <label for="" class="form_label_2 mb-2">Stock Count</label>
-          <input type="text" class="form_input">
+        <div class="mb-5 d-flex align-items-center">
+          <span class="form_label d-flex align-items-center mb-2">
+            <span class="me-2">
+              <img style="max-width: 20px" src="assets/images/gift-box.png" alt="" />
+            </span>
+            Gift
+          </span>
+          <label class="switch">
+            <input type="checkbox" checked />
+            <span class="slider round"></span>
+          </label>
         </div>
-        <div class="mb-5">
-          <label for="" class="form_label_2 mb-2">Color</label>
-          <input type="text" class="form_input">
-        </div>
-        <div class="mb-5">
-          <label for="" class="form_label_2 mb-2">Size</label>
-          <input type="text" class="form_input">
+        <div class="mb-5 d-flex align-items-center">
+          <span class="form_label d-flex align-items-center mb-2">
+            <span class="me-2">
+              <img style="max-width: 20px" src="assets/images/crown.png" alt="" />
+            </span>
+            Premium Delivery
+          </span>
+          <label class="switch">
+            <input type="checkbox" checked />
+            <span class="slider round"></span>
+          </label>
         </div>
         <div class="mb-5 d-flex justify-content-end align-items-center">
-          <input type="submit" class="btn btn_blue text_white ms-5">
+          <input type="submit" class="btn btn_blue text_white ms-5" />
           <button class="btn mx-5">Cancel</button>
         </div>
       </div>
       <p class="text_link hover_underline mt-5">+ Add Variation</p>
     </div>
   </form>
-  <form *ngSwitchCase="'seller-create-product-step-3'">
+  <form class="py-2" *ngSwitchCase="'seller-create-product-step-3'">
     <div class="mt-2">
       <div class="mb-5 form_border py-4 px-5">
         <div class="mb-5">
@@ -100,13 +192,13 @@
           <textarea class="form_text_area" name="" id="" cols="30" rows="10"></textarea>
         </div>
         <div class="mb-5">
-          <input type="submit" value="Save" class="w-25 btn btn_blue text_white">
+          <input type="submit" value="Save" class="w-25 btn btn_blue text_white" />
         </div>
       </div>
       <p class="text_link hover_underline mt-5">+ Add Variation</p>
     </div>
   </form>
-  <form *ngSwitchCase="'seller-create-product-step-4'">
+  <form class="py-2" *ngSwitchCase="'seller-create-product-step-4'">
     <div class="mt-2">
       <div class="mb-5 form_border py-4 px-5">
         <div class="keywords_container mb-5 d-flex flex-wrap">
@@ -122,51 +214,51 @@
         </div>
         <div class="mb-5">
           <label for="" class="form_label_2 mb-2">Keywords</label>
-          <input type="text" class="form_input">
+          <input type="text" class="form_input" />
         </div>
         <div class="mb-5">
-          <input type="submit" value="Save" class="w-25 btn btn_blue text_white">
+          <input type="submit" value="Save" class="w-25 btn btn_blue text_white" />
         </div>
       </div>
     </div>
   </form>
-  <form *ngSwitchCase="'seller-create-product-step-5'">
+  <form class="py-2" *ngSwitchCase="'seller-create-product-step-5'">
     <div class="mt-2">
       <div class="mb-5 form_border py-4 px-5">
         <div class="mb-5">
           <label for="" class="form_label_2 mb-2">Product Condition</label>
-          <input type="text" class="form_input">
+          <input type="text" class="form_input" />
         </div>
         <div class="mb-5">
           <label for="" class="form_label_2 mb-2">Your Price</label>
-          <input type="text" class="form_input">
+          <input type="text" class="form_input" />
         </div>
         <div class="mb-5">
           <label for="" class="form_label_2 mb-2">Offer Price</label>
-          <input type="text" class="form_input">
+          <input type="text" class="form_input" />
         </div>
         <div class="mb-5">
           <label for="" class="form_label_2 mb-2">Start Date</label>
-          <input type="date" class="form_input">
+          <input type="date" class="form_input" />
         </div>
         <div class="mb-5">
           <label for="" class="form_label_2 mb-2">End Date</label>
-          <input type="date" class="form_input">
+          <input type="date" class="form_input" />
         </div>
         <div class="mb-5">
           <label for="" class="form_label_2 mb-2">Offer Description Note</label>
-          <input type="textarea" class="form_text_area">
+          <input type="textarea" class="form_text_area" />
         </div>
         <div class="mb-5">
           <label for="" class="form_label_2 mb-2">Max Quantity</label>
-          <input type="text" class="form_input">
+          <input type="text" class="form_input" />
         </div>
         <div class="mb-5">
           <label for="" class="form_label_2 mb-2">Gift</label>
-          <input type="checkbox" class="">
+          <input type="checkbox" class="" />
         </div>
         <div class="mb-5">
-          <input type="submit" value="Save" class="w-25 btn btn_blue text_white">
+          <input type="submit" value="Save" class="w-25 btn btn_blue text_white" />
         </div>
       </div>
     </div>
@@ -175,44 +267,44 @@
     <div class="p-relative">
       <div class="sticky-top form_header pb-2">
         <div class="d-flex justify-content-between align-items-center pb-3 pt-4 px-4">
-          <h3>{{address_data?"Edit":'Add'}} Address</h3>
-          <div style="width:20px;" class="cursor_pointer" (click)="close_dialog($event)">
-            <img src="assets/images/close.png" class="img_fluid" alt="">
+          <h3>{{ address_data ? "Edit" : "Add" }} Address</h3>
+          <div style="width: 20px" class="cursor_pointer" (click)="close_dialog($event)">
+            <img src="assets/images/close.png" class="img_fluid" alt="" />
           </div>
         </div>
-        <hr class="divider">
+        <hr class="divider" />
       </div>
       <div class="px-4 pb-4">
         <div class="mb-5 mt-3">
           <label for="" class="form_label_2 mb-2">Name</label>
-          <input type="text" class="form_input" formControlName="name">
+          <input type="text" class="form_input" formControlName="name" />
         </div>
         <div class="mb-5">
           <label for="" class="form_label_2 mb-2">Phone</label>
-          <input type="text" class="form_input" formControlName="phone">
+          <input type="text" class="form_input" formControlName="phone" />
         </div>
         <div class="mb-5">
           <label for="" class="form_label_2 mb-2">Line 1</label>
-          <input type="text" class="form_input" formControlName="line1">
+          <input type="text" class="form_input" formControlName="line1" />
         </div>
         <div class="mb-5">
           <label for="" class="form_label_2 mb-2">Line 2</label>
-          <input type="text" class="form_input" formControlName="line2">
+          <input type="text" class="form_input" formControlName="line2" />
         </div>
         <div class="mb-5">
           <label for="" class="form_label_2 mb-2">City/Town</label>
-          <input type="text" class="form_input" formControlName="city">
+          <input type="text" class="form_input" formControlName="city" />
         </div>
         <div class="mb-5">
           <label for="" class="form_label_2 mb-2">Country</label>
-          <input type="text" class="form_input" formControlName="country">
+          <input type="text" class="form_input" formControlName="country" />
         </div>
         <div class="mb-5">
           <label for="" class="form_label_2 mb-2">Postcode</label>
-          <input type="text" class="form_input" formControlName="postcode">
+          <input type="text" class="form_input" formControlName="postcode" />
         </div>
         <div class="mb-5">
-          <input type="submit" class="btn btn_yellow">
+          <input type="submit" class="btn btn_yellow" />
         </div>
       </div>
     </div>
@@ -221,42 +313,41 @@
     <div class="p-relative">
       <div class="sticky-top form_header pb-2">
         <div class="d-flex justify-content-between align-items-center pb-3 pt-4 px-4">
-          <h3>{{payment_data?"Edit":'Add'}} Payment</h3>
-          <div style="width:20px;" class="cursor_pointer" (click)="close_dialog($event)">
-            <img src="assets/images/close.png" class="img_fluid" alt="">
+          <h3>{{ payment_data ? "Edit" : "Add" }} Payment</h3>
+          <div style="width: 20px" class="cursor_pointer" (click)="close_dialog($event)">
+            <img src="assets/images/close.png" class="img_fluid" alt="" />
           </div>
         </div>
-        <hr class="divider">
+        <hr class="divider" />
       </div>
       <div class="d-flex justify-content-center align-items-center">
         <div class="w-50">
           <div class="px-4 pb-4">
             <div class="mb-5 mt-3">
               <label for="" class="form_label_2 mb-2">Name on Card</label>
-              <input type="text" class="form_input" formControlName="payee_name">
+              <input type="text" class="form_input" formControlName="payee_name" />
             </div>
             <div class="mb-5" *ngIf="!payment_data">
               <label for="" class="form_label_2 mb-2">Card Number</label>
-              <input type="text" class="form_input" formControlName="card_number">
+              <input type="text" class="form_input" formControlName="card_number" />
             </div>
             <div class="mb-5">
               <label for="" class="form_label_2 mb-2">Expiration Date</label>
-              <input type="text" class="form_input" formControlName="card_expiry">
+              <input type="text" class="form_input" formControlName="card_expiry" />
             </div>
-
           </div>
         </div>
         <div class="w-50">
           <h1>hello</h1>
         </div>
       </div>
-      <hr class="divider">
+      <hr class="divider" />
       <div class="d-flex justify-content-end align-items-center p-3">
         <div class="me-4">
           <button class="btn" (click)="close_dialog($event)">cancel</button>
         </div>
         <div>
-          <input type="submit" class="btn btn_yellow">
+          <input type="submit" class="btn btn_yellow" />
         </div>
       </div>
     </div>

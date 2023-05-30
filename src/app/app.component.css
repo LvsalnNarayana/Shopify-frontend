@@ -1,0 +1,11 @@
+.oops_img_container{
+  width: 18vw;
+  height: fit-content;
+  margin: 40px 0px 0px 0px;
+  /* background-color: var(--grey-2);
+  padding: 40px;
+  border-radius: 50%; */
+}
+.oops_img_container img{
+  max-width: 100% !important;
+}
