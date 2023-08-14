@@ -13,10 +13,9 @@ import { environment } from 'src/environment';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-
   // @ViewChild('cart') cart!: MatSidenav
   title = 'Shopify-frontend';
   user_route_checked = false;
@@ -31,11 +30,12 @@ export class AppComponent {
     private http: HttpService,
     private router: Router,
     private product: ProductService
-    // private sideNav: SideNavService,
-  ) { }
+  ) // private sideNav: SideNavService,
+  {}
 
   ngOnInit() {
-    this.router.events.pipe(filter((event: any) => event instanceof NavigationEnd))
+    this.router.events
+      .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe((data: any) => {
         this.global.is_seller.next(false);
         if (data.url.split('/').slice(1)[0] === 'seller') {
@@ -48,15 +48,14 @@ export class AppComponent {
           this.user_route_checked = false;
         }
       });
-    this.http.get('/api').subscribe(
+    this.http.get('https://nysvsc-3000.csb.app').subscribe(
       (data: any) => {
         if (data.status === 404) {
           window.location.reload();
         } else if (data.status === 0) {
           this.connection_error = true;
           this.site_loader_status = false;
-        }
-        else {
+        } else {
           this.socket.connect();
           this.global.cookie_status.next(true);
           this.global.socket_status.subscribe((status) => {
@@ -65,7 +64,7 @@ export class AppComponent {
               this.product.GET_PRODUCTS_BY_USER();
               this.site_loader_status = false;
             }
-          })
+          });
         }
       },
       (error) => {
@@ -82,5 +81,3 @@ export class AppComponent {
     // this.sideNav.setSideNav(this.cart);
   }
 }
-
-
